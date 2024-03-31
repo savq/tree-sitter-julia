@@ -150,8 +150,8 @@ module.exports = grammar({
   ],
 
   conflicts: $ => [
-    [$.juxtaposition_expression, $._primary_expression], // adjoint
-    [$.juxtaposition_expression, $._expression],
+    // [$.juxtaposition_expression, $._primary_expression], // adjoint
+    // [$.juxtaposition_expression, $._expression],
     [$.matrix_row, $.comprehension_expression], // Comprehensions with newlines
     [$.argument_list, $.tuple_expression],
     [$.argument_list, $.parenthesized_expression],
@@ -223,9 +223,9 @@ module.exports = grammar({
       $._primary_expression,
       $._operation,
       $.compound_assignment_expression,
-      $.macrocall_expression,
+      // $.macrocall_expression,
       $.function_expression,
-      $.juxtaposition_expression,
+      // $.juxtaposition_expression,
       $.ternary_expression,
       $.operator,
       $.integer_literal,
@@ -706,20 +706,20 @@ module.exports = grammar({
       ),
     )),
 
-    macrocall_expression: $ => prec.right(seq(
-      optional(seq(
-        $._primary_expression,
-        token.immediate('.'),
-      )),
-      $.macro_identifier,
-      optional($.macro_argument_list),
-    )),
+    // macrocall_expression: $ => prec.right(seq(
+    //   optional(seq(
+    //     $._primary_expression,
+    //     token.immediate('.'),
+    //   )),
+    //   $.macro_identifier,
+    //   optional($.macro_argument_list),
+    // )),
 
-    macro_argument_list: $ => prec.left(repeat1(prec(PREC.macro_arg, choice(
-      $._expression,
-      $.assignment,
-      $.open_tuple,
-    )))),
+    // macro_argument_list: $ => prec.left(repeat1(prec(PREC.macro_arg, choice(
+    //   $._expression,
+    //   $.assignment,
+    //   $.open_tuple,
+    // )))),
 
     argument_list: $ => parenthesize(
       optional(';'),
@@ -903,14 +903,14 @@ module.exports = grammar({
       )
     )),
 
-    juxtaposition_expression: $ => prec.left(seq(
-      choice(
-        $.integer_literal,
-        $.float_literal,
-        $.adjoint_expression,
-      ),
-      $._primary_expression,
-    )),
+    // juxtaposition_expression: $ => prec.left(seq(
+    //   choice(
+    //     $.integer_literal,
+    //     $.float_literal,
+    //     $.adjoint_expression,
+    //   ),
+    //   $._primary_expression,
+    // )),
 
     compound_assignment_expression: $ => prec.right(PREC.assign, seq(
       $._primary_expression,
