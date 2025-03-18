@@ -33,11 +33,11 @@ void *tree_sitter_julia_external_scanner_create() {
     return NULL;
 }
 
-void tree_sitter_julia_external_scanner_destroy(void *payload) {}
+void tree_sitter_julia_external_scanner_destroy(void *_payload) {}
 
-unsigned tree_sitter_julia_external_scanner_serialize(void *payload, char *buffer) { return 0; }
+unsigned tree_sitter_julia_external_scanner_serialize(void *_payload, char *_buffer) { return 0; }
 
-void tree_sitter_julia_external_scanner_deserialize(void *payload, const char *buffer, unsigned size) {}
+void tree_sitter_julia_external_scanner_deserialize(void *_payload, const char *_buffer, unsigned _size) {}
 
 // Scanner functions
 
@@ -126,7 +126,7 @@ static bool scan_block_comment(TSLexer *lexer) {
     }
 }
 
-bool tree_sitter_julia_external_scanner_scan(void *payload, TSLexer *lexer, const bool *valid_symbols) {
+bool tree_sitter_julia_external_scanner_scan(void *_payload, TSLexer *lexer, const bool *valid_symbols) {
     if (valid_symbols[IMMEDIATE_PAREN] && lexer->lookahead == '(') {
         lexer->result_symbol = IMMEDIATE_PAREN;
         return true;
